@@ -7,12 +7,13 @@
 var app = require('../src/app');
 var debug = require('debug')('express-good-example:server');
 var http = require('http');
+const config = require('config')
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(config.get('server.port'));
 app.set('port', port);
 
 /**
@@ -24,12 +25,11 @@ var server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
-console.log("Server ready listening on port")
+console.log("Server ready listening on port " + port)
 
 /**
  * Normalize a port into a number, string, or false.
