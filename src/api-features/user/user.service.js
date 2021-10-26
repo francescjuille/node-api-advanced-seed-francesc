@@ -4,7 +4,9 @@ var moment = require('moment');
 module.exports = {
 
     checkLogin(email, password) {
-       return (email=="hola@gmail.com" && password=="root")
+        console.log("email: "+email);
+        console.log("password: "+password)
+       return true;
     },
 
     createToken(email, idUser) {
