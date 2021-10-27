@@ -6,7 +6,7 @@ module.exports = {
     checkLogin(email, password) {
         console.log("email: "+email);
         console.log("password: "+password)
-       return true;
+        return (email=="hola@gmail.com" && password=="root")
     },
 
     createToken(email, idUser) {
