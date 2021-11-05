@@ -9,7 +9,7 @@ module.exports = {
          return res.send("ping resolved")
      },
 
-     login(req, res) {
+     async login(req, res) {
         console.log("before sanitize")
         console.log(req.body);
         let errorsResponse = [];
@@ -25,8 +25,8 @@ module.exports = {
         password=req.body.password;
         console.log("body")
         console.log(req.body)
-        password= bcrypt.hashSync(password,10);
-        loginSuccess=userService.checkLogin(email, password)
+        //password= bcrypt.hashSync(password,10);
+        loginSuccess= await userService.checkLogin(email, password)
         console.log("loginSuccess: "+loginSuccess)
         if (loginSuccess) {
             token = userService.createToken(email)

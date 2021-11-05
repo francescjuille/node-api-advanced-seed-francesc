@@ -4,17 +4,20 @@ const bcrypt = require("bcryptjs")
 
 module.exports = {
 
-    checkLogin(email, password) {
+    async checkLogin(email, password) {
         console.log("email: "+email);
         console.log("password: "+password)
-        bcrypt.compare(password, "$2a$10$8vES.Ym0CdWYv9MYnpJLKeWoKouO5Nj2c3o91cpsWvc7znRx0OPjW", (err,res)=>{
-            if(res){
-                console.log("resS")
-                console.log(res)
-                return true;
-            }
+        return new Promise((resolve, reject)=>{
+            bcrypt.compare(password, "$2a$10$oNlnC10tt7A9VPRVKZ8FA.4EH/RdSBm1QhpIZ4Ca0V26OupifdJn2", (err,res)=>{
+                let response = false;
+                if(res){
+                    console.log("resS")
+                    console.log(res)
+                    response = true;
+                }
+                resolve(response)
+            });
         })
-        return false;
     },
 
     createToken(email, idUser) {
