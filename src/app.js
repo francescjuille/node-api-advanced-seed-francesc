@@ -8,7 +8,6 @@ const expressSanitizer = require('express-sanitizer')
 var indexRouter = require('./routes/index');
 
 var app = express();
-
 app.use(logger(config.get('logger')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

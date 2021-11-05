@@ -4,6 +4,8 @@ const { body, validationResult } = require('express-validator');
 module.exports = {
 
      ping(req, res) {
+         console.log("body:")
+         console.log(req.body)
          return res.send("ping resolved")
      },
 
@@ -12,14 +14,17 @@ module.exports = {
         console.log(req.body);
         let errorsResponse = [];
         const errors = validationResult(req);
+        console.log("VALIDATOR ERRORS:")
         console.log(errors.errors)
         if (errors.errors.length > 0) {
             errorsResponse = errors.errors;
             return res.status(400).send({"errors":errorsResponse, "data": null})
         }
-    
+
         email=req.body.email;
         password=req.body.password;
+        console.log("body")
+        console.log(req.body)
         password= bcrypt.hashSync(password,10);
         loginSuccess=userService.checkLogin(email, password)
         console.log("loginSuccess: "+loginSuccess)
