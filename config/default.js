@@ -5,7 +5,11 @@ module.exports = {
     },
     mysql: {
         port: 33003,
-        host: 'localhost'
+        username: "root",
+        password: '',
+        database: "user",
+        host: "127.0.0.1",
+        dialect: "mysql"
     },
     logger: 'dev',
 }

@@ -15,6 +15,8 @@
     "express-validator": "^6.13.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "mysql2": "^2.3.3-rc.0",
+    "sequelize": "^6.9.0"
   }
 }
