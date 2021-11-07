@@ -4,9 +4,9 @@ module.exports = {
         domain: 'localhost'
     },
     mysql: {
-        port: 33003,
+        port: 3306,
         username: "root",
-        password: '',
+        password: 'root',
         database: "user",
         host: "127.0.0.1",
         dialect: "mysql"
