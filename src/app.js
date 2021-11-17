@@ -15,5 +15,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressSanitizer())
 app.use('/', indexRouter);
-
+const db = require("./models");
+db.sequelize.sync();
 module.exports = app;

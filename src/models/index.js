@@ -10,7 +10,12 @@ const db = {};
 
 console.log('read mysql config')
 console.log(config.get('mysql')) 
-let sequelize = new Sequelize(config.get('mysql.host'), config.get('mysql.user'), config.get('mysql.password'), config.get('mysql'));
+let sequelize = new Sequelize(config.get('mysql.database'), config.get('mysql.user'), config.get('mysql.password'), config.get('mysql'),
+{
+  host: config.get('mysql.host'),
+  dialect: "mysql",
+}
+  );
 
 fs
   .readdirSync(__dirname)

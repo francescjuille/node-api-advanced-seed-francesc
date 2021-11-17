@@ -1,11 +1,15 @@
 module.exports = {
     server: {
-        port: '3000',
-        domain: 'my.api.com'
+        port: '4000',
+        domain: 'localhost'
     },
     mysql: {
-        port: 33003,
-        host: 'localhost'
+        port: 3306,
+        user: "root",
+        password: 'root',
+        database: "user",
+        host: "127.0.0.1",
+        dialect: "mysql"
     },
-    logger: 'prod'
+    logger: 'dev',
 }

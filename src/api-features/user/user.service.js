@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 var moment = require('moment');  
 const bcrypt = require("bcryptjs")
+const user = require('../../models').user;
 
 module.exports = {
 
@@ -18,6 +19,17 @@ module.exports = {
                 resolve(response)
             });
         })
+    },
+
+    async createNewUser(newUserData) {
+        let cryptedPassword = bcrypt.hashSync(newUserData.password,10);
+        return new Promise((resolve, reject)=>{
+            user.create ({
+                name: newUserData.name,
+                email: newUserData.email,
+                password: cryptedPassword
+            }).then(data => resolve(data)).catch(error => resolve(null))
+        });
     },
 
     createToken(email, idUser) {
