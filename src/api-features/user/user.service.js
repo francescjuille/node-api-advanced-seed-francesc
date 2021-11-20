@@ -8,8 +8,17 @@ module.exports = {
     async checkLogin(email, password) {
         console.log("email: "+email);
         console.log("password: "+password)
+
+        let userMatch = await user.findAll({
+            where: {
+                email: email
+            }
+          });
         return new Promise((resolve, reject)=>{
-            bcrypt.compare(password, "$2a$10$oNlnC10tt7A9VPRVKZ8FA.4EH/RdSBm1QhpIZ4Ca0V26OupifdJn2", (err,res)=>{
+            console.log("userMatch:")
+            console.log(userMatch[0])
+            if(userMatch.length === 0)resolve(false);
+            bcrypt.compare(password, userMatch[0]["dataValues"]["password"], (err,res)=>{
                 let response = false;
                 if(res){
                     console.log("resS")
@@ -22,14 +31,22 @@ module.exports = {
     },
 
     async createNewUser(newUserData) {
+        let userMatch = await user.findAll({
+            where: {
+                email: newUserData.email
+            }
+          });
+        if (userMatch.length > 0) {
+            return null;
+        }
+        
         let cryptedPassword = bcrypt.hashSync(newUserData.password,10);
-        return new Promise((resolve, reject)=>{
-            user.create ({
-                name: newUserData.name,
-                email: newUserData.email,
-                password: cryptedPassword
-            }).then(data => resolve(data)).catch(error => resolve(null))
+        let userCreated = await user.create ({
+            name: newUserData.name,
+            email: newUserData.email,
+            password: cryptedPassword
         });
+        return userCreated;
     },
 
     createToken(email, idUser) {

@@ -9,12 +9,17 @@ module.exports = {
          return res.send("ping resolved")
      },
 
+     async getUserInfo() {
+
+     },
+
      async createNewUser(req, res) {
         console.log("createNewUser call")
         console.log(req.body);
+        if(!Utils.handleErrors(req,res))return;
         let userCreated = await userService.createNewUser(req.body);
         if (userCreated == null){
-            return res.status(400).send({"errors":["invalid email or password"], "data": null})
+            return res.status(400).send({"errors":["error, account already created with this email"], "data": null})
         }else{
             return res.status(200).send({"errors":[], "data": {"userCreated":userCreated}})
         }
@@ -37,8 +42,8 @@ module.exports = {
             return res.status(200).send({"errors":[], "data": {"token":token}})
         }
         else {
-            errorsResponse = [{"msg":"Error: email or password incorrect"}]
-            return res.status(401).send({"errors":["error"], "data": null})
+            let errorsResponse = [{"msg":"Error: email or password incorrect"}]
+            return res.status(401).send({"errors":errorsResponse, "data": null})
         }
     },
 

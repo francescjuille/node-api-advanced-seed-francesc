@@ -10,6 +10,8 @@ const { body } = require('express-validator')
 router.post('/ping',mw.checkToken, userController.ping);
 router.post('/login', userValidator.validate_login(), userController.login);
 router.post('/newuser', userValidator.validate_newuser(), userController.createNewUser);
+router.get('/getuserinfo', userController.getUserInfo);
+
 
 
 module.exports = router;
